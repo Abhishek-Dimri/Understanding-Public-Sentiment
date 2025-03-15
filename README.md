@@ -53,7 +53,7 @@ The **Public Sentiment Analysis Web Application** is a platform designed to help
 ### Frontend Setup
 1. Install the necessary dependencies:
    ```bash
-   cd client
+   cd frontend
    npm install
    ```
 2. Start the React app:
