@@ -6,7 +6,7 @@ const Navbar = () => {
     <nav className={styles.nav}>
       <Link to="/">Home</Link>
       <Link to="/dashboard">Dashboard</Link>
-      <Link to="/upload">Upload CSV</Link>
+      {/* <Link to="/upload">Upload CSV</Link> */}
     </nav>
   );
 };
