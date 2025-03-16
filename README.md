@@ -34,6 +34,8 @@ The **Public Sentiment Analysis Web Application** is a platform designed to help
 - **Twitter API**: For fetching and analyzing tweets in real-time.
 - **Reddit API**: For analyzing discussions from Reddit threads.
 
+---
+
 ## Installation
 
 ### Prerequisites
@@ -42,43 +44,87 @@ The **Public Sentiment Analysis Web Application** is a platform designed to help
 - **Python 3.x** (for NLP and sentiment analysis models)
 - **MongoDB** (local installation or cloud-based solution like MongoDB Atlas)
 
-### Clone the Repository
-1. Clone this repository to your local machine:
+---
 
+### Step 1: Clone the Repository
+1. Clone this repository to your local machine:
+   ```bash
+   git clone https://github.com/your-username/Understanding-Public-Sentiment.git
+   ```
 2. Navigate to the project folder:
    ```bash
    cd Understanding-Public-Sentiment
    ```
 
-### Frontend Setup
-1. Install the necessary dependencies:
-   ```bash
-   cd frontend
-   npm install
-   ```
-2. Start the React app:
-   ```bash
-   npm run dev
-   ```
+---
 
-### Backend Setup
-1. Install backend dependencies:
+### Step 2: Backend Setup
+1. Navigate to the `backend` folder:
    ```bash
    cd backend
+   ```
+2. Install backend dependencies:
+   ```bash
    npm install
    ```
-2. Set up the environment variables for MongoDB and any API keys (e.g., Twitter API key).
-3. Start the backend server:
+3. Create a `.env` file in the `backend` folder and add the following environment variables:
+   ```env
+   MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/sentiment?retryWrites=true&w=majority
+   PORT=5000
+   ```
+   Replace `<username>` and `<password>` with your MongoDB credentials.
+
+4. Start the backend server:
    ```bash
    nodemon server.js
    ```
+   The backend will run on `http://localhost:5000`.
 
-### Running the App
-- The frontend will be available at `http://localhost:{PORT}` and the backend will run on `http://localhost:5000`.
+---
+
+### Step 3: Frontend Setup
+1. Navigate to the `frontend` folder:
+   ```bash
+   cd ../frontend
+   ```
+2. Install frontend dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the React app:
+   ```bash
+   npm run dev
+   ```
+   The frontend will be available at `http://localhost:3000`.
+
+---
 
 ## Usage
 
-- **Sentiment Analysis**: Upload text or enter customer reviews to get instant sentiment analysis.
-- **Trend Analysis**: Visualize sentiment trends over time, such as weekly or monthly data.
-- **Topic Modeling**: View the key topics being discussed, helping you understand the primary issues or strengths in customer feedback.
-- **Real-time Monitoring**: Fetch real-time public sentiment from social media platforms like Twitter and Reddit.
+### Sentiment Analysis
+1. Open the application in your browser at `http://localhost:3000`.
+2. Enter feedback text, source, and topic in the form.
+3. Submit the form to analyze the sentiment.
+4. View the sentiment score and detailed breakdown (positive, neutral, negative).
+
+### Feedback Distribution Chart
+- The dashboard displays a bar chart showing the count of positive, neutral, and negative feedback stored in the database.
+
+---
+
+## Example Workflow
+1. **Input**:
+   - Text: "The product is amazing and works perfectly!"
+   - Source: "Twitter"
+   - Topic: "Product Quality"
+
+2. **Output**:
+   - Sentiment Score: 0.8545
+   - Details:
+     - Negative: 0.0
+     - Neutral: 0.299
+     - Positive: 0.701
+   - Bar Chart:
+     - Positive: 3
+     - Neutral: 2
+     - Negative: 1

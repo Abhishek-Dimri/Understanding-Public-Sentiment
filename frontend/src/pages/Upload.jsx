@@ -12,9 +12,15 @@ const Upload = () => {
     if (!file) return;
     const formData = new FormData();
     formData.append('file', file);
-
-    // TODO: Add API call to backend
-    console.log('Uploading:', file);
+  
+    try {
+      const response = await axios.post('http://localhost:5000/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      console.log('Upload successful:', response.data);
+    } catch (error) {
+      console.error('Upload failed:', error);
+    }
   };
 
   return (

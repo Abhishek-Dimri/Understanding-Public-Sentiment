@@ -1,37 +1,22 @@
-const express = require("express");
-const cors = require("cors");
-const Sentiment = require("sentiment");
-const mongoose = require("mongoose");
-require("dotenv").config();
+const express = require('express');
+const connectDB = require('./config/database');
+const cors = require('cors');
+const dotenv = require('dotenv');
 
+dotenv.config({ path: './config/config.env' });
+
+
+
+connectDB();
 const app = express();
-app.use(cors());
+
 app.use(express.json());
 
-// Sentiment analysis setup
-const sentiment = new Sentiment();
+app.use(cors());
 
-// MongoDB connection
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("Connected to MongoDB"))
-    .catch((err) => console.error("MongoDB connection error:", err));
 
-// API route for sentiment analysis
-app.post("/analyze", (req, res) => {
-    const { text } = req.body;
-    const result = sentiment.analyze(text);
-    let sentimentResult = "";
-    if (result.score > 0) {
-        sentimentResult = "Positive 😊";
-    } else if (result.score < 0) {
-        sentimentResult = "Negative 😠";
-    } else {
-        sentimentResult = "Neutral 😐";
-    }
-    res.json({ sentiment: sentimentResult, score: result.score });
-});
+app.use('/auth', require('./routes/authRoutes'));
+app.use('/sentiment', require('./routes/sentimentRoutes'));
+app.use('/upload', require('./routes/uploadRoutes'));
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+app.listen(5000, () => console.log('Server running on port 5000'));
